@@ -1,0 +1,23 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+    web:
+        build: .
+        container_name: web
+        ports:
+            - 80:80
+
+    db:
+        image: postgres
+        container_name: db
+        environment:
+            POSTGRES_PASSWORD: example
+            POSTGRES_DB: pyohio
+
+    adminer:
+        image: adminer
+        container_name: adminer
+        ports:
+            - 8080:8080

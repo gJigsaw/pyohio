@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+sleep 10 # dirty hack to allow db to finish booting
+python manage.py syncdb --noinput
+python manage.py createsuperuser --noinput --username admin --email Support@PyOhio.Org
+python manage.py migrate
+python manage.py loaddata fixtures/*
+touch ${SITE_PATH}/database_initialized

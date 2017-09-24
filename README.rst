@@ -38,54 +38,34 @@ Rather than use this as the basis for your conference site directly, you
 should instead look at https://github.com/pinax/symposion which was
 designed for reuse.
 
-PyOhio 2015
+PyOhio.Org
 ============
 
-PyOhio 2015 is built on top of Pinax Symposion but may have
+PyOhio.Org is built on top of Pinax Symposion but may have
 customizations that may make things more difficult for you.
 
-To get running locally
-======================
+Running the Site
+================
 
-This documentation assume you have the following installed::
+Requirements:
 
-- `pip >= 1.2.1 <http://www.pip-installer.org/>`_
-- `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
-- `virtualenvwrapper >= 3.6 <http://pypi.python.org/pypi/virtualenvwrapper>`_
+- `docker >= 17.04.0-ce <https://www.docker.com/>`_
 
-Create a new virtualenv and install the necessary requirements::
+- A means to run `docker-compose`.
+  - You can either install it locally
+    or
+  - Use an image like `now` ( https://github.com/gJigsaw/docker/tree/master/now )
 
-    mkvirtualenv --distribute pyohio --python=python2.7
-    $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
+Instructions:
 
-(For production, install -r requirements/base.txt).
+to start: `docker-compose -f stack.yml up`
 
-Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
-
-    cp pyohio/settings/local.py.example pyohio/settings/local.py
-    echo "export DJANGO_SETTINGS_MODULE=pyohio.settings.local" >> $VIRTUAL_ENV/bin/postactivate
-    echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
-
-Exit the virtualenv and reactivate it to activate the settings just changed::
-
-    deactivate
-    workon pyohio
-
-Setup the postgres database and load fixtures::
-
-    createdb pyohio
-    python manage.py syncdb
-    python manage.py migrate
-    python manage.py loaddata fixtures/*
-
-Create a user account::
-
-    python manage.py createsuperuser
-
-
-Run local server::
-
-    python manage.py runserver
+Note:
+On a stack's first run, it will run `initialize_database`.
+  
+For Gondor
+==========
+**for glory!**
 
 Here's how to get a local copy of the database::
 
@@ -93,11 +73,6 @@ Here's how to get a local copy of the database::
     $ dropdb pyohio2015
     $ createdb pyohio2015
     $ psql pyohio2015 < /tmp/pyohio2015.pg_dump
-
-For Gondor
-==========
-
-**for glory!**
 
 Copy database instance from previous year locally::
 

@@ -1,0 +1,4 @@
+#!/bin/bash
+[[ -f ${SITE_PATH}/database_initialized ]] || ${SITE_PATH}/initialize_database
+exec python manage.py runserver 0.0.0.0:80
+
